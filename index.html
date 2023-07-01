@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Website</title>
+    <style>
+        body {
+            margin: 50px auto;
+            padding: 0;
+            display: grid;
+            grid-template-columns: auto auto;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            background-color: #332A37;
+        }
+
+        .box {
+            height: 600px;
+            margin: 0px 50px;
+            width: 600px;
+            display: flex;
+            background-image: url("img/back.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 5%;
+            box-shadow: 0px 0px 29px 11px rgba(61, 166, 82, 0.45);
+            /*
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+            */
+        }
+
+        .box img {
+            height: 150px;
+        }
+
+        .codebox {
+            height: fit-content;
+            width: 600px;
+            display: grid;
+            grid-template-columns: 30px auto;
+            background-color: #282C34;
+            color: #fff;
+            box-shadow: 0px 0px 29px 11px rgba(30, 30, 30, 0.45);
+            border-radius: 5%;
+            padding: 2px 20px;
+        }
+
+        .codebox .code {
+            padding: 20px 0px;
+        }
+
+        .codebox .para {
+            opacity: 0.3;
+        }
+
+        .codebox .blue {
+            color: #61AEEE;
+        }
+
+        .codebox .green {
+            color: #98C379;
+        }
+
+        .codebox .pad {
+            padding-left: 25px;
+        }
+
+        #propertyName {
+            background-color: #282C34;
+            color: #fff;
+            border: none;
+            outline: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        #propertyValue {
+            background-color: #282C34;
+            color: #fff;
+            border: none;
+            outline: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .btn {
+            display: flex;
+            float: right;
+            background-color: #7C3AED;
+            border-radius: 8px;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            margin: 0px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img src="img/panda.gif" alt="">
+    </div>
+    <div class="codebox">
+        <div class="para">
+            <p> 1</p>
+            <p> 2</p>
+            <p> 3</p>
+            <p> 4</p>
+            <p> 5</p>
+            <p> 6</p>
+        </div>
+        <div class="code">
+            <span></span>
+            <span class="blue">#field</span> {
+            <p>
+                <span class="green pad">display: </span>flex;
+            </p>
+            <div class="pad">
+                <select class="green" id="propertyName">
+                    <option value="choose">choose</option>
+                    <option value="flex-direction">flex-direction</option>
+                    <option value="justify-content">justify-content</option>
+                    <option value="align-content">align-content</option>
+                    <option value="align-items">align-items</option>
+                </select>:
+                <select id="propertyValue">
+                    <option value="choose">choose</option>
+                </select>;
+            </div>
+            <p>}</p>
+            <button class="btn" id="submitBtn">Submit Your Answer</button>
+            <button class="btn" id="resetBtn">Reset</button>
+
+        </div>
+    </div>
+</body>
+<script>
+    const propertyName = document.querySelector('#propertyName');
+    const propertyValue = document.querySelector('#propertyValue');
+    const submitBtn = document.querySelector('#submitBtn');
+    const resetBtn = document.querySelector('#resetBtn')
+    const box = document.querySelector('.box');
+    const property = {
+        'flex-direction': ['row', 'row-reverse', 'column', 'column-reverse'],
+        'align-content': ['center', 'flex-start', 'flex-end', 'space-around', 'space-between', 'stretch'],
+        'justify-content': ['center', 'flex-start', 'flex-end', 'space-between', 'space-around', 'space-evenly'],
+        'align-items': ['center', 'flex-star', 'flex-end', 'stretch', 'baseline'],
+        'choose': ['choose']
+    }
+    propertyName.addEventListener('change', function () {
+        values = property[propertyName.value]
+        propertyValue.innerHTML = '';
+        values.forEach(element => {
+            let op = document.createElement('option')
+            op.value = element;
+            op.innerText = element;
+            propertyValue.append(op);
+
+        });
+    })
+    submitBtn.addEventListener('click', function () {
+        let prop = propertyName.value;
+        let val = propertyValue.value;
+        box.setAttribute('style', `${propertyName.value}: ${propertyValue.value}`);
+    })
+    resetBtn.addEventListener('click', function () {
+        box.attributes['style'].value = ''
+    })
+</script>
+
+</html>
